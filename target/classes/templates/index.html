@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Home Page</title>
+	<link rel="stylesheet" th:href="@{/css/header.css}" />
+	<style>
+		.nav {
+			background-color: #eeefff;
+			border-radius: 20px;
+			box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 5) inset;
+		}
+
+		.header {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100px;
+		}
+
+		.logo {
+			width: 30%;
+			font-weight: bold;
+			font-size: 180%;
+			color: #3f5cbc;
+		}
+
+		.connect {
+			width: 50%;
+			font-size: 120%;
+		}
+
+		.connect a {
+			margin: 15px;
+			font-weight: bold;
+			text-decoration: none;
+			color: #111827;
+		}
+
+		.connect a:hover {
+			color: #3f5cbc;
+		}
+
+		.log {
+			width: 30%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: row;
+		}
+
+		.log a {
+			margin: 5px;
+			text-decoration: none;
+		}
+
+		.log a:first-child {
+			color: #111827;
+			padding: 10px 20px;
+			border-radius: 10px;
+		}
+
+		.log a:first-child:hover {
+			background-color: #f9fafb;
+		}
+
+		.log a:last-child {
+			color: white;
+			padding: 10px 20px;
+			background-color: #3f5cbc;
+			border-radius: 10px;
+			font-weight: bold;
+		}
+
+		.log a:last-child:hover {
+			background-color: #1e40af;
+		}
+
+		button {
+			color: white;
+			padding: 10px 20px;
+			background-color: #3f5cbc;
+			border-radius: 10px;
+			font-weight: bold;
+			border: none;
+			cursor: pointer;
+		}
+
+		button:hover {
+			background-color: #1e40af;
+		}
+
+		.adminlog {
+			height: 0px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.adminlog h3 {
+			width: 20%;
+			color: white;
+			margin: 5px;
+			padding: 5px 5px;
+			background-color: #3f5cbc;
+			border-radius: 10px;
+			font-weight: bold;
+			box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 5) inset;
+		}
+
+		.adminlog h3:hover {
+			background-color: #1e40af;
+		}
+
+		.tip {
+			position: relative;
+			display: inline-block;
+			cursor: pointer;
+		}
+
+		.tip .tipnote {
+			font-size: 15px;
+			visibility: hidden;
+			width: 150px;
+			background-color: #333;
+			color: #fff;
+			text-align: center;
+			border-radius: 6px;
+			padding: 5px;
+			position: absolute;
+			z-index: 1;
+			top: -30px;
+			left: 50%;
+			transform: translateX(-50%);
+			opacity: 0;
+			transition: opacity 0.3s;
+		}
+
+		.tip:hover .tipnote {
+			visibility: visible;
+			opacity: 0.5;
+		}
+
+		body {
+			font-family: calibri;
+			text-align: center;
+			background: linear-gradient(-45deg, #DCF8EF, #FEE2F8, #96afff, #eeefff);
+			background-size: 400% 400%;
+			animation: gradient 15s ease infinite;
+			height: 100vh;
+		}
+
+		@keyframes gradient {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+
+		/*header css*/
+		body .navhome {
+			color: #3f5cbc;
+		}
+
+		/*main css*/
+		.main {
+			width: 50%;
+			margin-left: 25%;
+			margin-right: 25%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+		}
+
+		.intro {
+			margin-top: 30px;
+		}
+
+		.intro h1 {
+			font-size: 200%;
+		}
+
+		.explain h3 {
+			font-weight: 100;
+		}
+
+		.baselog {
+			display: flex;
+		}
+
+		.baselog a {
+			margin: 5px;
+			text-decoration: none;
+		}
+
+		.baselog a:first-child {
+			color: white;
+			padding: 10px 20px;
+			background-color: #3f5cbc;
+			border-radius: 10px;
+			font-weight: bold;
+		}
+
+		.baselog a:first-child:hover {
+			background-color: #1e40af;
+		}
+
+		.baselog a:last-child {
+			color: #111827;
+			padding: 10px 20px;
+			border-radius: 10px;
+		}
+
+		.baselog a:last-child:hover {
+			background-color: #f9fafb;
+		}
+
+		.shops {
+			align-items: center;
+			justify-content: center;
+			display: grid;
+			grid-gap: 30px;
+			grid-template-columns: 30% 30% 30%;
+		}
+
+
+		.shop {
+			background-color: #ffffff;
+			width: 250px;
+			text-align: left;
+			border-radius: 10px;
+			padding: 10px 10px 10px 10px;
+			line-height: 17pt;
+		}
+
+		.shop:hover {
+			box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+		}
+
+		.dropdown {
+			padding: 20px;
+			background-color: #eeefff;
+			border-radius: 20px;
+			box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 5) inset;
+		}
+
+		.dropdown select {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			padding: 12px 20px;
+		}
+
+		.dropdown input[type=submit] {
+			color: white;
+			padding: 12px 20px;
+			border: 0px;
+			border-radius: 10px;
+			background-color: #3f5cbc;
+		}
+
+		.dropdown label {
+			text-align: left;
+		}
+
+		.dropdown form {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 30px;
+		}
+
+		.dropdown button {
+			color: white;
+			background-color: #3f5cbc;
+			border: none;
+			border-radius: 10px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		.dropdown button:hover {
+			background-color: #1e40af;
+		}
+
+		@media only screen and (max-width: 768px) {
+			.shops {
+				width:0%;
+			grid-template-columns: 70%;
+		}
+		}
+	
+	
+	</style>
+</head>
+
+<body>
+	<div th:replace="header :: header"></div>
+
+	<div class="main">
+		<div class="intro">
+			<h1>Find the Best Phones at Amazing Prices</h1>
+		</div>
+
+		<div class=intro>
+			<h2>Select a company</h2>
+		</div>
+		<div class="dropdown">
+			<form>
+				<select name="selectedPhone">
+					<option value="" selected></option>
+					<option value="samsung">Samsung</option>
+					<option value="apple">Apple</option>
+					<option value="vivo">Vivo</option>
+					<option value="oneplus">Oneplus</option>
+					<option value="nokia">Nokia</option>
+					<option value="oppo">Oppo</option>
+				</select>
+				<button type="submit" style="padding: 10px">Search</button>
+			</form>
+		</div>
+
+		<div class="explain">
+			<h2>Trending Today</h2>
+			<div class="shops">
+
+				<div class="shop">
+					<h2 style="text-align: center;">Samsung Galaxy Flip</h2>
+					<img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTSbC-gsKr_-9aUVF0z21FPDV0RIVih8AH1RViLoTHqkm7KsCy6tdyqb5kWr6Tpctv6tzpb6t4QUyqZSem0uYtjnNd9h3pq8Ut88ocM1TldSGXREmwksEgO&usqp=CAE"
+						alt="Image Description" width="250" height="250">
+
+					<p style="text-align: left;">
+						<br>
+						<span style="font-weight: bold;">4.5 / 5 Rating</span><br>
+						<span>Smartphone . Single SIM . 5G</span>
+					</p>
+				</div>
+
+				<div class="shop">
+					<h2 style="text-align: center;">Samsung Galaxy S20</h2>
+					<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTENni0MV8KWDJhl9nPYN30vpzIFxCmiakj2cig8zjN0hgykywr5H46W311-CfFfom9krVA1IDax2C6ZOP9LyXY4LeUriHB-PhLZuC70X-vCdSeIlLC4-GPuQ&usqp=CAE"
+						alt="Image Description" width="250" height="250">
+
+					<p style="text-align: left;">
+						<br>
+						<span style="font-weight: bold;">4.5 / 5 Rating</span><br>
+						<span>Smartphone . Single SIM . 5G</span>
+					</p>
+				</div>
+
+				<div class="shop">
+					<h2 style="text-align: center;">Redmi Note 12 Pro</h2>
+					<img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcSWF8mgncfl4kDLyO7xQgVRi6hvxGH1jv2iBoBb6q6ui-kKAtnYG7hA9PUP46UBBiPpfpjEFi4ajd5tce5_hooRrE-HoCFbHQmbuopGzwRYw1EUst29gj_g&usqp=CAE"
+						alt="Image Description" width="250" height="250">
+
+					<p style="text-align: left;">
+						<br>
+						<span style="font-weight: bold;">4.5 / 5 Rating</span><br>
+						<span>Smartphone . Single SIM . 5G</span>
+					</p>
+				</div>
+
+				<div class="shop">
+					<h2 style="text-align: center;">OnePlus Nord 3 5G</h2>
+					<img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT9eIFizBzIrl4QEl4t-z_S8wSgCSZDXJQBO_le508CdEb4hUR5sFaM70v_Ps08us9WeAyEiKIIT84_dSsW2eqnkSBRSA36Nhqrqk-2gpsnrl_L1t2OvhWewQ&usqp=CAE"
+						alt="Image Description" width="250" height="250">
+
+					<p style="text-align: left;">
+						<br>
+						<span style="font-weight: bold;">4.5 / 5 Rating</span><br>
+						<span>Smartphone . Single SIM . 5G</span>
+					</p>
+				</div>
+
+				<div class="shop">
+					<h2 style="text-align: center;">Motorola Razr 40</h2>
+					<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSwZ0CKTn7Uum00wikvOKL0jqySYike-VtSLRlfoofAWYQA6OUFW_vQ1MPT0bEsb1iXn7s-zYFMvlIBbsCk57QrQB1wRjqEPV8Op513iiAd6Rl4_51tVx_HkA&usqp=CAE"
+						alt="Image Description" width="250" height="250">
+
+					<p style="text-align: left;">
+						<br>
+						<span style="font-weight: bold;">4.5 / 5 Rating</span><br>
+						<span>Smartphone . Single SIM . 5G</span>
+					</p>
+				</div>
+
+				<div class="shop">
+					<h2 style="text-align: center;">Apple iPhone 15</h2>
+					<img src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTZJHkCtRsotaexfqq8Rf2WpesD7247NpJndxNqIcG6uTpza_p7_ilHCbB8oA9yNZhICh5Zc_iCoCh4HGFafpU6S4oG4Uc5jWdsO4l4ToVFYfmjY3Rf7vmtIvDd&usqp=CAE"
+						alt="Image Description" width="250" height="250">
+
+					<p style="text-align: left;">
+						<br>
+						<span style="font-weight: bold;">4.5 / 5 Rating</span><br>
+						<span>Smartphone . Single SIM . 5G</span>
+					</p>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="footer"
+		style="margin-top: 50px; border-top-left-radius: 20px; border-top-right-radius: 20px; background-color: #4f46e5; color: #b0b7f9; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+		<div class="basedata" style="padding-top: 50px; width: 40%;">
+			<p>Find amazing Phone at affordable prices</p>
+			<h1 style="color: white;">Phones you will love</h1>
+			<h3 style="font-weight: lighter; font-size: 120%;">
+				Your search is over here and a new phone is almost in hands <br> just few clicks to go <br>♥♥♥
+			</h3>
+			<br>
+			<a th:href="@{/learnmore}"
+				style="text-decoration: none; background-color: #f9fafb; color: #111827; padding: 10px 20px; border-radius: 10px;">Learn
+				More</a>
+			<p>&copy; Test Project Xenonstack| <b>Harshwardhan Patil</b>, CDAC Noida | March 2023 Batch </p>
+		</div>
+	</div>
+
+</body>
+
+</html>

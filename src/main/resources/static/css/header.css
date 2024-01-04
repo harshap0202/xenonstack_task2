@@ -1,0 +1,147 @@
+.nav {
+	background-color: #eeefff;
+	border-radius: 20px;
+	box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 5) inset;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100px;
+}
+
+.logo {
+	width: 30%;
+	font-weight: bold;
+	font-size: 180%;
+	color: #3f5cbc;
+}
+
+.connect {
+	width: 50%;
+	font-size: 120%;
+}
+
+.connect a {
+	margin: 15px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #111827;
+}
+
+.connect a:hover {
+	color: #3f5cbc;
+}
+
+.log {
+	width: 30%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+}
+
+.log a {
+	margin: 5px;
+	text-decoration: none;
+}
+
+.log a:first-child {
+	color: #111827;
+	padding: 10px 20px;
+	border-radius: 10px;
+}
+
+.log a:first-child:hover {
+	background-color: #f9fafb;
+}
+
+.log a:last-child {
+	color: white;
+	padding: 10px 20px;
+	background-color: #3f5cbc;
+	border-radius: 10px;
+	font-weight: bold;
+}
+
+.log a:last-child:hover {
+	background-color: #1e40af;
+}
+
+button {
+	color: white;
+	padding: 10px 20px;
+	background-color: #3f5cbc;
+	border-radius: 10px;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #1e40af;
+}
+
+.adminlog {
+	height: 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.adminlog h3 {
+	width: 20%;
+	color: white;
+	margin: 5px;
+	padding: 5px 5px;
+	background-color: #3f5cbc;
+	border-radius: 10px;
+	font-weight: bold;
+	box-shadow: 0 0px 5px 0 rgba(0, 0, 0, 5) inset;
+}
+
+.adminlog h3:hover {
+	background-color: #1e40af;
+}
+
+.tip {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.tip .tipnote {
+	font-size: 15px;
+	visibility: hidden;
+	width: 150px;
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	top: -30px;
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.tip:hover .tipnote {
+	visibility: visible;
+	opacity: 0.5;
+}
+
+@media only screen and (max-width: 768px) {
+  .connect {
+    display: grid;
+grid-template-columns: 70%;
+  }
+  
+    .log {
+    display: grid;
+grid-template-columns: 70%;
+  }
+ }
